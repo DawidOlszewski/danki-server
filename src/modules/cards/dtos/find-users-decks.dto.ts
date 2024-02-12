@@ -6,5 +6,4 @@ export const FindUsersDecksSchema = z.object({
   //TODO .uuid()
 });
 
-export class FindUsersDecksDtO extends createZodDto(FindUsersDecksSchema) {}
-export type FindUsersDecksDto = Required<FindUsersDecksDtO>;
+export class FindUsersDecksDto extends createZodDto(FindUsersDecksSchema) {}

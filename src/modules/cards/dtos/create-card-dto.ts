@@ -11,5 +11,4 @@ export const CreateCardSchema = z
   })
   .required();
 
-export class CreateCardDtO extends createZodDto(CreateCardSchema) {}
-export type CreateCardDto = Required<CreateCardDtO>;
+export class CreateCardDto extends createZodDto(CreateCardSchema) {}

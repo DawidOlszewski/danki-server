@@ -12,13 +12,12 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
     "noImplicitAny": true,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
-
+    "strict": true,
     "paths": {
       "@cards/*": ["src/modules/cards/*"],
       "@decks/*": ["src/modules/decks/*"],

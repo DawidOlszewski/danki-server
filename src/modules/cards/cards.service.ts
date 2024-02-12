@@ -1,24 +1,17 @@
 import { Card } from './card.model';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateCardDto } from './dtos/create-card-dto';
 import { UUID } from '../../types/uuid.type';
 
 @Injectable()
 export class CardsService {
-  cards: Card[] = [];
-  id = 1;
+  constructor(@Inject(Card) private readonly cardsModel: typeof Card) {}
 
-  findCardsfromDeck(deckId: UUID) {
-    return this.cards.filter((card) => card.deckId == deckId);
+  async findCard(id: UUID) {
+    return this.cardsModel.query().where({ id });
   }
 
-  createCard(createCardDto: CreateCardDto) {
-    this.cards.push({
-      id: (this.id++).toString(),
-      ...createCardDto,
-      updateDate: new Date(),
-      cretedDate: new Date(),
-    });
-    return this.id;
+  async createCard(createCardDto: CreateCardDto) {
+    return this.cardsModel.query().insertGraph(createCardDto);
   }
 }
