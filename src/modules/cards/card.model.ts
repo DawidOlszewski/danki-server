@@ -1,7 +1,11 @@
+// import { UUID } from '../../types/uuid.type';
+type UUID = string;
 export class Card {
-  id!: string;
-  deckId: string; //TODO: change type to UUID
-  front!: string; //TODO: html?
-  back!: string;
-  tags!: string[];
+  id: UUID;
+  deckId: UUID;
+  front: string; //TODO: html?
+  back: string;
+  tags: string[];
+  updateDate: Date;
+  cretedDate: Date;
 }

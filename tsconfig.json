@@ -16,6 +16,13 @@
     "noImplicitAny": true,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "esModuleInterop": true,
+
+    "paths": {
+      "@cards/*": ["src/modules/cards/*"],
+      "@decks/*": ["src/modules/decks/*"],
+      "@types/*": ["src/types/*"],
+    }
+  },
 }
