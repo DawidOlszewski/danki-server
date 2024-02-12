@@ -1,0 +1,26 @@
+services:
+  backend:
+    image: bitnami/node:18-prod
+    command: bash -c "npm install && npm run start:dev"
+    working_dir: /app
+    volumes: . : /app
+  restart: unless-stopped
+  ports:  3000 : 3000
+environment:
+  DB_USERNAME: postgres
+  DB_PASSWORD: pass
+  DB: sklep
+  DB_HOST: db
+  DB_PORT: 5432
+  PORT: 3000
+depends_on: db
+
+db:
+  image: postgres
+  volumes: db-data:/var/lib/postgresql/data
+environment:
+  POSTGRES_PASSWORD: pass
+  POSTGRES_DB: sklep
+
+volumes:
+  db-data:
