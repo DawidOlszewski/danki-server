@@ -8,10 +8,13 @@ const dbConfig = {
     port: getenv('DB_PORT'),
     user: getenv('DB_USERNAME'),
     password: getenv('DB_PASSWORD'),
-    database: getenv('DB_DATABASE'),
+    // database: getenv('DB_DATABASE'),
   },
   migrations: {
-    directory: 'migrations',
+    directory: './migrations',
+  },
+  seeds: {
+    directory: './seeds',
   },
   useNullAsDefault: true,
   ...knexSnakeCaseMappers(),

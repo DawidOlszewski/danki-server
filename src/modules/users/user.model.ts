@@ -1,6 +1,6 @@
-import { Deck } from '@cards/deck.model';
 import { Model } from 'objection';
 import { Email, UUID } from '../../types/uuid.type';
+import { Deck } from '../cards/deck.model';
 
 export class User extends Model {
   id!: UUID;
@@ -14,12 +14,12 @@ export class User extends Model {
 
   static get relationMappings() {
     return {
-      cards: {
+      decks: {
         relation: Model.HasManyRelation,
         modelClass: Deck,
         join: {
           from: 'users.id',
-          to: 'deck.ownerId',
+          to: 'decks.ownerId',
         },
       },
     };

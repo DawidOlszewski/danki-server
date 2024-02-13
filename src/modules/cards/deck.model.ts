@@ -16,7 +16,7 @@ export class Deck extends Model {
     return {
       cards: {
         relation: Model.HasManyRelation,
-        modelClass: Deck,
+        modelClass: Card,
         join: {
           from: 'decks.id',
           to: 'cards.deckId',

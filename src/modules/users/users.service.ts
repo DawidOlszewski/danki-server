@@ -13,7 +13,7 @@ export class UsersService {
     const filledUser = await this.usersModel
       .query()
       .findById(id)
-      .withGraphFetched('decks');
+      .withGraphFetched({ decks: true });
     return filledUser?.decks;
   }
 }
