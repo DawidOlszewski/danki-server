@@ -16,6 +16,9 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       PORT: 3000
+      GOOGLE_SECRET: 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
+      GOOGLE_ID: 777794280584-9ofa3ul724h1oku3sqv2fc0rmn9k9jql.apps.googleusercontent.com
+      SECRET_KEY: abecadlo
     depends_on:
       - db
 

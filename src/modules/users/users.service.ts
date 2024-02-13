@@ -15,6 +15,7 @@ export class UsersService {
       .query()
       .findById(id)
       .withGraphFetched({ decks: true });
+    console.log(filledUser);
     return filledUser?.decks;
   }
 
@@ -23,5 +24,9 @@ export class UsersService {
       .query()
       .insertAndFetch(createUserDto);
     return createdUser;
+  }
+
+  getAllUsers() {
+    return this.usersModel.query();
   }
 }

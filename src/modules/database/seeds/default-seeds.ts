@@ -3,22 +3,18 @@ import { Deck } from 'src/modules/cards/deck.model';
 import { User } from 'src/modules/users/user.model';
 
 export async function seed(knex: Knex): Promise<void> {
-  await knex('cards').del();
-  await knex('decks').del();
+  await knex('identities').del();
   await knex('users').del();
+  await knex('decks').del();
+  await knex('cards').del();
 
   //TODO: use objection here
 
-  const currentDate = new Date().toISOString();
-  const dates = {
-    updatedAtString: currentDate,
-    createdAtString: currentDate,
-  };
   const [user] = await knex('users')
-    .insert({ ...dates, email: 'dawid@gmail.com', username: 'DawidO' })
+    .insert({ email: 'dawid@gmail.com', username: 'DawidO' })
     .returning<User[]>('*');
   const [deck] = await knex('decks')
-    .insert({ ...dates, title: 'super wszystko', ownerId: user.id })
+    .insert({ title: 'super wszystko', ownerId: user.id })
     .returning<Deck[]>('*');
 
   const flashcards = [
@@ -30,7 +26,6 @@ export async function seed(knex: Knex): Promise<void> {
 
   await knex('cards').insert(
     flashcards.map((card) => ({
-      ...dates,
       deckId: deck.id,
       front: card[0],
       back: card[1],

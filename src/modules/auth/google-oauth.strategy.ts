@@ -44,8 +44,6 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     user = await this.usersService.createUser({
       email: emails![0].value,
       username: `${name!.givenName} ${name!.familyName}`,
-      createdAtString: new Date().toISOString(),
-      updatedAtString: new Date().toISOString(), //TODO: mend it
     } as CreateUserDto);
 
     console.log(user);
