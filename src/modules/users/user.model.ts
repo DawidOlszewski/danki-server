@@ -1,6 +1,6 @@
-import { Model } from 'objection';
 import { Email, UUID } from '../../types/uuid.type';
 import { Deck } from '../cards/deck.model';
+import { Model } from '../database/model';
 
 export class User extends Model {
   id!: UUID;
@@ -23,7 +23,5 @@ export class User extends Model {
         },
       },
     };
-
-    //TODO: identity
   }
 }

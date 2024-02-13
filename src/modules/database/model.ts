@@ -26,7 +26,8 @@ export class Model extends ObjectionModel {
     this.updatedAt = new Date();
   }
 
-  $beforeInsert() {
-    this.createdAt = new Date();
-  }
+  // $beforeInsert() {
+  //   this.updatedAt = new Date();
+  //   // this.createdAt = new Date();
+  // }
 }

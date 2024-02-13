@@ -8,5 +8,6 @@ import { User } from './user.model';
   providers: [UsersService],
   controllers: [UsersController],
   imports: [ObjectionModule.forFeature([User])],
+  exports: [UsersService],
 })
 export class UsersModule {}

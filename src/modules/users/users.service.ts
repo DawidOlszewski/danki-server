@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { User } from './user.model';
+import { CreateUserDto } from './dtos/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -15,5 +16,12 @@ export class UsersService {
       .findById(id)
       .withGraphFetched({ decks: true });
     return filledUser?.decks;
+  }
+
+  async createUser(createUserDto: CreateUserDto) {
+    const createdUser = await this.usersModel
+      .query()
+      .insertAndFetch(createUserDto);
+    return createdUser;
   }
 }
