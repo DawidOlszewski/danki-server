@@ -14,7 +14,7 @@ import { ObjectionModule } from '@willsoto/nestjs-objection';
   imports: [
     JwtModule.registerAsync({
       useFactory: () => ({
-        secret: getenv('SECRET_KEY'),
+        secret: getenv('JWT_SECRET_KEY'),
         global: true,
       }),
     }),

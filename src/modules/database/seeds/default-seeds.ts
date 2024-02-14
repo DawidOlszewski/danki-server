@@ -3,10 +3,10 @@ import { Deck } from 'src/modules/cards/deck.model';
 import { User } from 'src/modules/users/user.model';
 
 export async function seed(knex: Knex): Promise<void> {
-  await knex('identities').del();
-  await knex('users').del();
-  await knex('decks').del();
   await knex('cards').del();
+  await knex('decks').del();
+  await knex('users').del();
+  await knex('identities').del();
 
   //TODO: use objection here
 

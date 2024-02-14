@@ -3,8 +3,8 @@ import { google } from 'googleapis';
 
 export function printGoogleUrl() {
   const oauth2Client = new google.auth.OAuth2(
-    getenv('GOOGLE_ID'),
-    getenv('GOOGLE_SECRET'),
+    getenv('GOOGLE_OAUTH_ID'),
+    getenv('GOOGLE_OAUTH_SECRET'),
     'http://localhost:3000/auth/callback/google',
   );
 

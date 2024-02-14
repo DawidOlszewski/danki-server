@@ -5,6 +5,7 @@ import {
   Param,
   ParseUUIDPipe,
   Post,
+  Res,
   UseGuards,
 } from '@nestjs/common';
 import { DecksService } from './decks.service';
@@ -13,6 +14,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/decorators/current-user-decorator';
 import { User } from '../users/user.model';
+import { Response } from 'express';
+import { Readable } from 'node:stream';
 
 @Controller('decks')
 @ApiTags('decks')
@@ -27,9 +30,17 @@ export class DecksController {
   }
 
   @Get(':id/generate')
-  async createApkg(@Param('id', ParseUUIDPipe) id: string) {
-    await this.decksService.createApkg(id);
-    return 'ok';
+  async createApkg(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Res() res: Response,
+  ) {
+    const [ankiZip, title] = await this.decksService.createApkg(id);
+    res.setHeader(
+      'Content-disposition',
+      'attachment; filename=' + title + '.apkg',
+    );
+    res.setHeader('Content-type', 'application/zip');
+    Readable.from(ankiZip).pipe(res);
   }
 
   @Get()

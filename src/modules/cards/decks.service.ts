@@ -34,8 +34,8 @@ export class DecksService {
     // const file = readFileSync('pixel.jpg');
     // apkg.addMedia('pixel.jpg', file);
     // apkg.addCard('card #3 with image <img src="pixel.jpg">', 'uuo');
-    const zip = await apkg.save();
-    console.log(zip);
+    const deckZip = (await apkg.save()) as Buffer;
+    // console.log(zip);
     // await writeFile('output.apkg', zip);
     // writeFile('name.txt', 'hello world', (err) => {
     //   if (err) {
@@ -44,6 +44,7 @@ export class DecksService {
     //     console.log('File saved!');
     //   }
     // });
+    return [deckZip, deck.title];
   }
 
   async getAllDecks() {

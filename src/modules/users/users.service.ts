@@ -15,7 +15,6 @@ export class UsersService {
       .query()
       .findById(id)
       .withGraphFetched({ decks: true });
-    console.log(filledUser);
     return filledUser?.decks;
   }
 
