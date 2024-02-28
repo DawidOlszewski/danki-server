@@ -16,9 +16,9 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       PORT: 3000
-      GOOGLE_OAUTH_SECRET: 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
-      GOOGLE_OAUTH_ID: 777794280584-9ofa3ul724h1oku3sqv2fc0rmn9k9jql.apps.googleusercontent.com
-      JWT_SECRET_KEY: abecadlo
+      JWT_SECRET_KEY: abcadło
+      GOOGLE_OAUTH_ID: FILLME
+      GOOGLE_OAUTH_SECRET: FILLME
     depends_on:
       - db
 

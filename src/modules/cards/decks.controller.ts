@@ -29,6 +29,11 @@ export class DecksController {
     return this.decksService.createDeck(createDeckDto, user.id);
   }
 
+  @Get(':id')
+  async findDeck(@Param('id', ParseUUIDPipe) id: string) {
+    return this.decksService.findDeck(id);
+  }
+
   @Get(':id/generate')
   async createApkg(
     @Param('id', ParseUUIDPipe) id: string,
@@ -44,7 +49,7 @@ export class DecksController {
   }
 
   @Get()
-  async getAllDecks() {
-    return this.decksService.getAllDecks();
+  async findAllDecks() {
+    return this.decksService.findAllDecks();
   }
 }

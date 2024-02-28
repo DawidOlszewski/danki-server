@@ -4,15 +4,16 @@ import { UUID } from '../../types/uuid.type';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 //@ts-expect-error
 import AnkiExport from 'anki-apkg-export';
-import { writeFile } from 'fs/promises';
-import { readFileSync } from 'fs';
 
 @Injectable()
 export class DecksService {
   constructor(@Inject(Deck) private decksModel: typeof Deck) {}
 
   findDeck(id: UUID) {
-    return this.decksModel.query().findById(id);
+    return this.decksModel
+      .query()
+      .findById(id)
+      .withGraphFetched({ cards: true });
   }
 
   async createDeck(createDeckDto: CreateDeckDto, ownerId: UUID) {
@@ -31,42 +32,12 @@ export class DecksService {
     deck.cards.map((card) => {
       apkg.addCard(card.front, card.back, { tags: card.tags });
     });
-    // const file = readFileSync('pixel.jpg');
-    // apkg.addMedia('pixel.jpg', file);
-    // apkg.addCard('card #3 with image <img src="pixel.jpg">', 'uuo');
+
     const deckZip = (await apkg.save()) as Buffer;
-    // console.log(zip);
-    // await writeFile('output.apkg', zip);
-    // writeFile('name.txt', 'hello world', (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     console.log('File saved!');
-    //   }
-    // });
     return [deckZip, deck.title];
   }
 
-  async getAllDecks() {
+  async findAllDecks() {
     return this.decksModel.query();
   }
-
-  //   const fs = require('fs');
-  // const AnkiExport = require('anki-apkg-export').default;
-
-  // const apkg = new AnkiExport('deck-name');
-
-  // apkg.addMedia('anki.png', fs.readFileSync('anki.png'));
-
-  // apkg.addCard('card #1 front', 'card #1 back');
-  // apkg.addCard('card #2 front', 'card #2 back', { tags: ['nice', 'better card'] });
-  // apkg.addCard('card #3 with image <img src="anki.png" />', 'card #3 back');
-
-  // apkg
-  //   .save()
-  //   .then(zip => {
-  //     fs.writeFileSync('./output.apkg', zip, 'binary');
-  //     console.log(`Package has been generated: output.pkg`);
-  //   })
-  //   .catch(err => console.log(err.stack || err));
 }

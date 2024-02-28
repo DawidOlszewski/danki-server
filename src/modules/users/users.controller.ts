@@ -3,7 +3,6 @@ import {
   Get,
   Param,
   ParseUUIDPipe,
-  Req,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -11,7 +10,6 @@ import { UsersService } from './users.service';
 import { JwtGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/decorators/current-user-decorator';
 import { User } from './user.model';
-import { Request } from 'express';
 
 @Controller('users')
 @ApiTags('users')
@@ -36,9 +34,7 @@ export class UsersController {
   }
 
   @Get()
-  @ApiBearerAuth()
-  getAllUsers(@Req() req: Request) {
-    console.log(req.headers);
+  getAllUsers() {
     return this.usersService.getAllUsers();
   }
 }

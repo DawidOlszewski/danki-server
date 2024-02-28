@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './user.model';
 import { CreateUserDto } from './dtos/create-user.dto';
 
@@ -15,6 +15,9 @@ export class UsersService {
       .query()
       .findById(id)
       .withGraphFetched({ decks: true });
+    if (!filledUser) {
+      throw new NotFoundException();
+    }
     return filledUser?.decks;
   }
 
